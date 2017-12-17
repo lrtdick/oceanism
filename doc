@@ -1,0 +1,71 @@
+宝塔地址：http://47.94.215.40:8888
+username:yiishop
+password:FJzc4HYCr45J
+ftp
+username:root
+password:Qwe13579
+
+                booking(预定系统)
+
+id                  int(11)                 n                   主键，自增
+userid              int(11)                 n                   操作人员的id
+passport            varchar(255)            n                   护照
+tel                 varchar(20)             n                   手机号
+username            varchar(50)             n                   姓名
+Predetermined_time  int(11)                 n                   预定时间
+checkin_time        int(11)                 y                   到店时间
+checkout_time       int(11)                 y                   离店时间
+deposit_cny         decimal(9,2)            y                   定金默认为0人民币（CNY）
+deposit_peso        decimal(9,2)            y                   定金默认为0菲律宾币（PESO）
+commission          decimal(9,2)            y                   代理商提成
+state               int(2)                  n                   0代表未结账1代表已结账
+remark              varchar(255)            y                   备注栏
+
+                     booking_goods(预定商品)
+
+id                  int(11)                 n                   主键，自增
+name                varchar(100)            n                   商品名称
+intro               varchar(225)            y                   商品简介
+
+
+                     category_goods(商品分类)
+
+id                  int(11)                 n                   主键，自增
+cname               varchar(100)            n                   分类名称
+intro               varchar(225)            y                   分类简介
+state               int(2)                  n                   分类状态0代表删除1代表存在
+sort                int(11)                 y                   排序
+created_time        int(11)                 n                   创建时间
+
+                     goods(商品表)
+
+id                  int(11)                 n                   主键，自增
+category_id         int(11)                 n                   商品分类id
+gname               varchar(100)            n                   商品名称
+intro               varchar(225)            y                   商品简介
+specification       varchar(50)             y                   规格
+unit                varchar(50)             y                   单位
+sn                  varchar(50)             y                   货号
+stock               int(11)                 n                   库存默认为0
+price_cny           decimal(9,2)            y                   人民币价格(CNY)
+price_peso          decimal(9,2)            y                   菲律宾币(PESO)
+is_sale             int(2)                  n                   是否上架1上架0不上架默认为1
+state               int(3)                  n                   商品状态（是否删除）0是删除1是为删除默认为1
+created_time        int(11)                 n                   创建时间
+
+                     record(消费记录)手机或护照保证唯一（每日记录，包括住宿记录，参加潜水项目记录，租用装备的记录，车辆接送的记录）
+
+id                  int(11)                 n                   主键，自增
+rid                 int(11)                 n                   记录id默认0暂时不知道用处
+username            varchar(50)             n                   姓名
+passport            varchar(255)            n                   护照
+tel                 varchar(20)             n                   手机号
+type                int(2)                  n                   1代表住宿记录2代表参加潜水记录3代表租用装备记录4代表车辆接送的记录5代表其他
+cny                 decimal(9,2)            y                   人民币
+peso                decimal(9,2)            y                   菲律宾币（peso）
+content             text                    y                   消费内容
+remark              varchar(255)            y                   备注栏
+created_time        int(11)                 n                   消费时间
+按月分表，
+                    account_system(结账系统)
+
