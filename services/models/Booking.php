@@ -57,7 +57,7 @@ class Booking extends \yii\db\ActiveRecord
             'userid' => 'Userid',
             'passport' => '护照(Passport)',
             'tel' => '手机号(Tel)',
-            'username' => '姓名(Username)',
+            'username' => '姓名(name)',
             'Predetermined_time' => '预定时间(Predetermined Time)',
             'checkin_time' => '到店时间(Checkin Time)',
             'checkout_time' => '离店时间(Checkout Time)',

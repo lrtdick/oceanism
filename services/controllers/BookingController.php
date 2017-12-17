@@ -25,8 +25,10 @@ class BookingController extends \yii\web\Controller
     public function actionBooking(){
         $model=new Booking();
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
-            $model->userid=\Yii::$app->user->identity->getId();
+
+//            $model->userid=\Yii::$app->user->identity->getId();//测试不填 登录做完再填
             $model->Predetermined_time=time();
+            $model->state=1;
             $model->save();
             \Yii::$app->session->setFlash('success','预定成功(Predetermined success)');
             return "<script>window.history.go(-2);</script>";
