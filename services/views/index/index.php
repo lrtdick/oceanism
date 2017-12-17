@@ -231,12 +231,12 @@ AppAsset::register($this);
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
-                            <a href="/businesses/services/index/finance/finance-index" target="main_iframe">
+                            <a href="/businesses/services/index/fixed-assets-category/index" target="main_iframe">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 固定资产分类列表
                             </a>
                         </li>
                         <li class="sidebar-nav-link">
-                            <a href="/businesses/services/index/transfer/index" target="main_iframe">
+                            <a href="/businesses/services/index/fixed-assets-goods/index" target="main_iframe">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 固定资产列表
                             </a>
                         </li>

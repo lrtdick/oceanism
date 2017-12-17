@@ -3,16 +3,17 @@
 namespace services\controllers;
 
 use services\models\CategoryGoods;
+use services\models\FixedAssetsCategory;
 use services\models\Goods;
 use yii\data\Pagination;
 
-class CategoryGoodsController extends \yii\web\Controller
+class FixedAssetsCategoryController extends \yii\web\Controller
 {
-    /*商品分类列表*/
+    /*固定资产分类列表*/
     public function actionIndex()
     {
         /*分页条数10*/
-        $query=CategoryGoods::find()->where(['state'=>1]);
+        $query=FixedAssetsCategory::find()->where(['state'=>1]);
         $total=$query->count();
         $pageSize=10;
         $pager=new Pagination([
@@ -24,28 +25,28 @@ class CategoryGoodsController extends \yii\web\Controller
     }
     /*商品分类添加*/
     public function actionAdd(){
-        $model=new CategoryGoods();
+        $model=new FixedAssetsCategory();
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
             $model->created_time=time();
             $model->save();
-            \Yii::$app->session->setFlash('success','商品分类添加成功(create category success)');
-            return $this->redirect(['category-goods/index']);
+            \Yii::$app->session->setFlash('success','固定资产分类添加成功(success)');
+            return $this->redirect(['fixed-assets-category/index']);
         }
         return $this->render('add',['model'=>$model]);
     }
     /*修改商品分类*/
     public function actionEdit($id){
-        $model=CategoryGoods::findOne($id);
+        $model=FixedAssetsCategory::findOne($id);
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
             $model->save();
-            \Yii::$app->session->setFlash('success','商品分类修改成功(create category success)');
-            return $this->redirect(['category-goods/index']);
+            \Yii::$app->session->setFlash('success','固定资产分类修改成功(success)');
+            return $this->redirect(['fixed-assets-category/index']);
         }
         return $this->render('add',['model'=>$model]);
     }
     /*商品分类删除*/
     public function actionDel(){
-        $model=CategoryGoods::findOne(\Yii::$app->request->get('id'));
+        $model=FixedAssetsCategory::findOne(\Yii::$app->request->get('id'));
         if($model){
             $goods=Goods::findAll(['category_id'=>$model->id]);
             if($goods){
@@ -58,6 +59,6 @@ class CategoryGoodsController extends \yii\web\Controller
         }else{
             \Yii::$app->session->setFlash('success',"对不起您要删除的数据没有找到(sorry it's not found)");
         }
-        return $this->redirect(['category-goods/index']);
+        return $this->redirect(['fixed-assets-category/index']);
     }
 }

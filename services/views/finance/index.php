@@ -90,11 +90,11 @@
                     }else{
                         echo '请选择搜索类型';
                     } ?></td>
-            <td><?= $model->peso ?></td>
             <td><?= $model->rmb ?></td>
+            <td><?= $model->peso ?></td>
 
             <td><?=$model->comment?></td>
-            <td><?= date('Y-m-d',$model->ctime)?></td>
+            <td><?= date('Y-m-d H:i:s',$model->ctime)?></td>
             <td>
                 <?=\yii\bootstrap\Html::a('编辑',['finance/edit','id'=>$model->id],['class'=>'btn btn-sm btn-info'])?>
                 <a href="/businesses/services/index/finance/del?id=<?=$model->id?>" class="btn btn-sm btn-danger shanchu" title="">删除</a>

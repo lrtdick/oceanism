@@ -11,7 +11,7 @@ class BookingController extends \yii\web\Controller
     public function actionIndex()
     {
         /*分页条数10*/
-        $query=Booking::find();
+        $query=Booking::find()->where(['state'=>1]);
         $total=$query->count();
         $pageSize=10;
         $pager=new Pagination([
@@ -61,7 +61,8 @@ class BookingController extends \yii\web\Controller
     public function actionDel(){
         $model=Booking::findOne(\Yii::$app->request->get('id'));
         if($model){
-            $model->delete();
+            $model->state=0;
+            $model->save();
             \Yii::$app->session->setFlash('success','删除成功(delete success)');
         }else{
             \Yii::$app->session->setFlash('success',"对不起您要删除的数据没有找到(sorry it's not found)");

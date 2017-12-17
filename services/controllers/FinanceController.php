@@ -15,7 +15,7 @@ class FinanceController extends Controller {
 	    //$rs = new FinanceSystem();
 //        $key = \Yii::$app->request->get('key');
         $key='';
-        $rs = FinanceSystem::find();
+        $rs = FinanceSystem::find()->where(['state'=>1]);
         if(\Yii::$app->request->get('key')){
             $rs->where(['collect'=>\Yii::$app->request->get('key')]);
             $key=\Yii::$app->request->get('key');
@@ -23,7 +23,7 @@ class FinanceController extends Controller {
         $total = $rs->count();
         $type='';
         //每页显示条数 3
-        $perPage = 6;
+        $perPage = 10;
         //分页工具类
         $pager = new Pagination([
             'totalCount'=>$total,
@@ -66,7 +66,8 @@ class FinanceController extends Controller {
 	
 	public function actionDel($id){
 		 $model = FinanceSystem::findOne(['id'=>$id]);
-         $model->delete();
+        $model->state=0;
+        $model->save();
         return $this->redirect(['finance/finance-index']);
 	}
 	
