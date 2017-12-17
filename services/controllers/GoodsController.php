@@ -36,8 +36,7 @@ class GoodsController extends \yii\web\Controller
     public function actionEdit($id){
         $model=Goods::findOne($id);
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
-            $model->userid=\Yii::$app->user->identity->getId();
-            $model->Predetermined_time=time();
+            $model->created_time=time();
             $model->save();
             \Yii::$app->session->setFlash('info','商品修改成功');
             return $this->redirect(['goods/index']);

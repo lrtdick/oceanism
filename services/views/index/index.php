@@ -183,13 +183,20 @@ AppAsset::register($this);
                                 </li>
                                 <li class="sidebar-nav-link">
                                     <a href="#" class="sidebar-nav-sub-title">
-                                        <i class="am-icon-table sidebar-nav-link-logo"></i> 结账系统
+                                        <i class="am-icon-table sidebar-nav-link-logo"></i> 消费系统
                                         <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
                                     </a>
                                     <ul class="sidebar-nav sidebar-nav-sub">
                                         <li class="sidebar-nav-link">
                                             <a href="/businesses/services/index/goods/index" target="main_iframe">
-                                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 结账
+                                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 消费记录
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="sidebar-nav sidebar-nav-sub">
+                                        <li class="sidebar-nav-link">
+                                            <a href="/businesses/services/index/goods/index" target="main_iframe">
+                                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 结账/checkout
                                             </a>
                                         </li>
                                     </ul>
