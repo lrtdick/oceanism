@@ -9,7 +9,7 @@ class FinanceSystem extends ActiveRecord {
 
 
     public static function tableName() {
-        return  'wp_finance_system';
+        return  'ktz_finance_system';
     }
 
 

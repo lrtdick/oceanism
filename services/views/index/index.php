@@ -241,7 +241,7 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li class="sidebar-nav-link">
-                            <a href="/businesses/services/index/transfer/index" target="main_iframe">
+                            <a href="/businesses/services/index/fixed-assets-goods-change-record/index" target="main_iframe">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 固定资产列表改变记录
                             </a>
                         </li>

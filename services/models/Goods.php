@@ -22,6 +22,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $state
  * @property integer $created_time
  */
+
 class Goods extends \yii\db\ActiveRecord
 {
     /*商品是否上架*/
@@ -35,7 +36,7 @@ class Goods extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'goods';
+        return 'ktz_goods';
     }
 
     /**

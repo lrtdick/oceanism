@@ -28,7 +28,7 @@ class Booking extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'booking';
+        return 'ktz_booking_record';
     }
 
     /**

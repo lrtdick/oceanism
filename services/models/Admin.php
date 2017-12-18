@@ -32,7 +32,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return 'admin';
+        return 'ktz_admin';
     }
 
     /**

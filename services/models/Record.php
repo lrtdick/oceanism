@@ -19,6 +19,7 @@ use Yii;
  * @property string $remark
  * @property integer $created_time
  */
+
 class Record extends \yii\db\ActiveRecord
 {
     /**
@@ -26,7 +27,7 @@ class Record extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'record';
+        return 'ktz_guest_spending_record';
     }
 
     /**

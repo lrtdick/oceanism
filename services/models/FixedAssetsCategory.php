@@ -21,7 +21,7 @@ class FixedAssetsCategory extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'fixed_assets_category';
+        return 'ktz_fixed_assets_category';
     }
 
     /**

@@ -35,7 +35,7 @@ class FixedAssetsGoods extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'fixed_assets_goods';
+        return 'ktz_fixed_assets_goods';
     }
 
     /**
@@ -75,6 +75,14 @@ class FixedAssetsGoods extends \yii\db\ActiveRecord
     {
         return ArrayHelper::merge(['' => '请选择商品分类'], ArrayHelper::map(FixedAssetsCategory::findAll(['state' => 1]), 'id', 'cname'));
     }
+
+    /*获取所有未删除的物品*/
+    public static function getGoods()
+    {
+        return ArrayHelper::merge(['' => '请选择物品'], ArrayHelper::map(FixedAssetsGoods::findAll(['state' => 1]), 'id', 'gname'));
+    }
+
+
 
     /*商品和商品分类的一对一关系*/
     public function getCategoryOne()

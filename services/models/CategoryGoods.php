@@ -21,7 +21,7 @@ class CategoryGoods extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'category_goods';
+        return 'ktz_goods_category';
     }
 
     /**
