@@ -9,12 +9,27 @@
 namespace services\controllers;
 
 
+use services\filters\RbacFilter;
 use yii\web\Controller;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {   public $layout=false;
     public function actionIndex(){
-        $this->layout=false;
-        return $this->render('index');
+        if(\Yii::$app->user->isGuest){
+
+
+            return $this->redirect(['admin/login']);
+        }
+
+
+        $buttons=$this->BaseButton['zh'];
+
+        return $this->render('index',
+            [
+                'buttons'=>$buttons,
+            ]
+        );
+
+
     }
 }

@@ -30,9 +30,9 @@ class FinanceSystem extends ActiveRecord {
           'comment'  => '备注信息(Comment)',
       ];
   }
-  
-  /*获取所有类型*/
+
+    /*获取所有类型*/
     public static function getType(){
-        return ArrayHelper::merge(['type'=>0],FinanceSystem::find()->select(['collect'])->groupBy('collect')->asArray()->all());
+        return ArrayHelper::merge(['type'=>0],Type::find()->select(['leixing','id'])->asArray()->all());
     }
 }

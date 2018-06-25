@@ -20,7 +20,7 @@ use yii\web\IdentityInterface;
  * @property integer $last_login_time
  * @property string $last_login_ip
  */
-class Admin extends \yii\db\ActiveRecord implements IdentityInterface
+class Admin extends BaseActiveRecord implements IdentityInterface
 {
     public $code;
     public $password;
@@ -47,6 +47,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
             ['password','string'],
             ['email','email'],
             ['role','safe'],
+            ['use_en','required'],
             ['password','required','on'=>self::SCENARIO_ADD],
         ];
     }
@@ -61,7 +62,8 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
             'password' => '密码',
             'tel' => '联系方式',
             'role'=>'所属角色',
-            'code'=>'验证'
+            'code'=>'验证',
+            'use_en'=>'使用英语'
         ];
     }
     //save之前要执行的操作  必须返回true，否则save（）方法不会执行

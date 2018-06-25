@@ -23,7 +23,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $created_time
  */
 
-class Goods extends \yii\db\ActiveRecord
+class Goods extends BaseActiveRecord
 {
     /*商品是否上架*/
     public static $is_on_sale = [
@@ -45,12 +45,11 @@ class Goods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'gname', 'is_sale'], 'required'],
-            [['category_id', 'stock', 'is_sale', 'state'], 'integer'],
-            [['price_cny', 'price_peso'], 'number', 'numberPattern' => '/^\d*\.*\d*$/'],
+            [['category_id', 'gname', 'is_on_sale'], 'required'],
+            [['category_id', 'stock', 'is_on_sale', 'status'], 'integer'],
+            [['price_cny', 'price_peso','price_agent_cny','price_agent_peso'], 'number'],
             [['gname'], 'string', 'max' => 100],
             [['intro'], 'string', 'max' => 255],
-            [['specification', 'unit', 'sn'], 'string', 'max' => 50],
         ];
     }
 
@@ -64,21 +63,20 @@ class Goods extends \yii\db\ActiveRecord
             'category_id' => '所属分类(Category)',
             'gname' => '商品名称(Gname)',
             'intro' => '商品简介(Intro)',
-            'specification' => '规格(Specification)',
-            'unit' => '单位(Unit)',
-            'sn' => '货号(Sn)',
-            'stock' => '库存(Stock)',
-            'price_cny' => '人民币(Price Cny)',
-            'price_peso' => '菲律宾币(Price Peso)',
-            'is_sale' => '是否上架(Is Sale)',
-            'state' => 'State',
+            'stock' => '数量(Stock)',
+            'price_cny' => '挂牌价(Price CNY)',
+            'price_peso' => '挂牌价(Price PESO)',
+            'price_agent_cny' => '代理商协议价(Price CNY for Agent)',
+            'price_agent_peso' => '代理商协议价(Price PESO for Agent)',
+            'is_on_sale' => '是否上架(Is ON Sale)',
+            'status' => '状态',
         ];
     }
 
     /*获取所有未删除的分类*/
     public static function getCategory()
     {
-        return ArrayHelper::merge(['' => '请选择商品分类'], ArrayHelper::map(CategoryGoods::findAll(['state' => 1]), 'id', 'cname'));
+        return ArrayHelper::merge(['' => '请选择商品分类'], ArrayHelper::map(CategoryGoods::findAll(['status' => 1]), 'id', 'cname'));
     }
 
     /*商品和商品分类的一对已关系*/

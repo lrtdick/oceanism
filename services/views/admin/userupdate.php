@@ -7,7 +7,7 @@ echo $form->field($model,'newpassword')->passwordInput();
 echo $form->field($model,'surepassword')->passwordInput();
 
 echo \yii\bootstrap\Html::submitButton('立即修改',['class'=>'btn btn-sm btn-info']);
-echo '&nbsp;',\yii\bootstrap\Html::a('取消',['admin/index1'],['class'=>"btn btn-sm btn-danger"]);
+echo '&nbsp;<input type="button" name="Submit" value="取消"  class="btn btn-sm btn-success" onclick="javascript:window.history.back(-1);">';
 \yii\bootstrap\ActiveForm::end();
 ?>
     </div>

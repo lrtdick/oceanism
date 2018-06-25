@@ -7,9 +7,11 @@
         echo $form->field($model,'intro');
         echo $form->field($model,'price_cny');
         echo $form->field($model,'price_peso');
-        echo $form->field($model,'is_sale',['inline'=>1])->radioList(\services\models\Goods::$is_on_sale);
-        echo \yii\bootstrap\Html::submitButton('提交',['class'=>'btn btn-sm btn-success']);
-        echo '&nbsp;<input type="button" name="Submit" value="返回上一页"  class="btn btn-sm btn-success" onclick="javascript:window.history.back(-1);">';
+        echo $form->field($model,'price_agent_cny');
+        echo $form->field($model,'price_agent_peso');
+        echo $form->field($model,'is_on_sale',['inline'=>1])->radioList($buttons['is_on_sale']);
+        echo \yii\bootstrap\Html::submitButton($buttons['common']['submit'],['class'=>'btn btn-sm btn-success']);
+        echo '&nbsp;<input type="button" name="Submit" value="Back"  class="btn btn-sm btn-success" onclick="javascript:window.history.back(-1);">';
         \yii\bootstrap\ActiveForm::end();
         ?>
     </div>

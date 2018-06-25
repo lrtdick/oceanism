@@ -8,6 +8,7 @@
     <tr>
         <th>用户名</th>
         <th>手机号</th>
+        <th>英语页面</th>
         <th>最后登陆时间</th>
         <th>最后登录IP</th>
         <th>状态</th>
@@ -17,6 +18,7 @@
     <tr>
         <td><?=$model->username?></td>
         <td><?=$model->tel?></td>
+        <td><?=$model->use_en==1?'是':'否'?></td>
         <td><?=$model->last_login_time?date('Y-m-d H:i:s',$model->last_login_time):''?></td>
         <td><?=$model->last_login_ip?></td>
         <td><?=$model->status==0?'已禁用':'已启用'?></td>

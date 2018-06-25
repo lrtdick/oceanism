@@ -3,6 +3,7 @@
 namespace services\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "record".
@@ -36,13 +37,11 @@ class Record extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['rid', 'username', 'passport', 'tel', 'type', 'created_time'], 'required'],
-            [['rid', 'type', 'created_time'], 'integer'],
-            [['cny', 'peso'], 'number'],
+            [['type','content'], 'required'],
+            [['admin_id', 'type', 'created_time'], 'integer'],
+            [['cny', 'peso'], 'number','numberPattern'=>'/^\d*\.*\d*$/'],
             [['content'], 'string'],
-            [['username'], 'string', 'max' => 50],
-            [['passport', 'remark'], 'string', 'max' => 255],
-            [['tel'], 'string', 'max' => 20],
+            ['remark', 'string', 'max' => 255],
         ];
     }
 
@@ -53,16 +52,25 @@ class Record extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'rid' => '记录(Rid)',
-            'username' => '姓名(Username)',
-            'passport' => '护照(Passport)',
-            'tel' => '手机号(Tel)',
-            'type' => '1代表住宿记录2代表参加潜水记录3代表租用装备记录4代表车辆接送的记录5代表其他(Type)',
+            'admin_id' => '操作者ID(admin_id)',
+            'type' => '消费类型',
             'cny' => '人民币(Cny)',
-            'peso' => '菲律宾币(Peso)',
+            'peso' => '比索(Peso)',
             'content' => '消费内容(Content)',
             'remark' => '备注栏(Remark)',
             'created_time' => '消费时间(Created Time)',
         ];
+    }
+    /*消费记录admin_id和客服代理商建立一对一的关系*/
+    public function getAdmin(){
+        return $this->hasOne(Admin::className(),['id'=>'admin_id']);
+    }
+    /*获取所有的类型*/
+    public static function type(){
+        return ArrayHelper::map(ConsumeType::find()->all(),'id','type');
+    }
+    /*获取所有的类型用于添加时展示*/
+    public static function type1(){
+        return ArrayHelper::merge([''=>'请选择消费类型'],ArrayHelper::map(ConsumeType::find()->where(['state'=>1,'status'=>1])->all(),'id','type'));
     }
 }

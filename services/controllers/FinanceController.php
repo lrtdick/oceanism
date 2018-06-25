@@ -3,13 +3,14 @@ namespace services\controllers;
 
 
 
+use services\filters\RbacFilter;
 use services\models\FinanceSystem;
 use yii\web\Controller;
 use yii\data\Pagination;
 
 
 
-class FinanceController extends Controller {
+class FinanceController extends BaseController {
 	
 	public function actionFinanceIndex(){
 	    //$rs = new FinanceSystem();
@@ -30,7 +31,7 @@ class FinanceController extends Controller {
             'defaultPageSize'=>$perPage
         ]);
         // var_dump($brands);exit;
-        $models = $rs->limit($pager->limit)->offset($pager->offset)->all();
+        $models = $rs->limit($pager->limit)->orderBy('id desc')->offset($pager->offset)->all();
         return $this->render('index',['models'=>$models,'pager'=>$pager,'type'=>$type,'key'=>$key]);
 	}
 
@@ -58,7 +59,7 @@ class FinanceController extends Controller {
 				$model['utime'] = time();
                 $model->save();
                \Yii::$app->session->setFlash('success','修改成功');
-                return  $this->redirect('index');
+            return $this->redirect(['finance/finance-index']);
             
         }
         return $this->render('add',['model'=>$model]);
@@ -86,6 +87,15 @@ class FinanceController extends Controller {
        // 这个key就是搜索条件  一样的where
       // $model->where($where)->order('ts_order_topup.update_time DESC,ts_order_topup.ordertime DESC')->findPage(20);
         return $this->render('index',['article'=>$article]);
+    }
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'only'=>['add','index','edit','del'],
+            ]
+        ];
     }
 
 }
