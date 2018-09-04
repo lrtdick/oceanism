@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 class Transfer extends ActiveRecord {
 	
 	 public static function tableName() {
-        return  'wp_transfer_record';
+        return  'ktz_transfer_record';
     }
 
 

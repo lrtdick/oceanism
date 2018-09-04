@@ -12,25 +12,33 @@ use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
+use Yii;
 
-class AdminController extends \yii\web\Controller
+class AdminController extends BaseController
 {
     //用户列表
     public function actionIndex()
     {
-        //分页 总条数 每页条数 当前页码
-        $query=Admin::find();
-        //总条数
-        $total=$query->count();
-        //每页显示条数
-        $pageSize=10;
-        //当前页码
-        $pager=new Pagination([
-            'totalCount'=>$total,
-            'defaultPageSize'=>$pageSize
-        ]);
-        $models=$query->limit($pager->limit)->offset($pager->offset)->select(['id','username','tel','last_login_time','last_login_ip','status'])->all();
-        return $this->render('index',['models'=>$models,'pager'=>$pager]);
+        //固定部分
+        $view= Yii::$app->controller->action->id;
+
+//        var_dump($view);exit();
+
+        $Search_condition=[
+            'search_key'=>\Yii::$app->request->get("search_key"),
+            'search_value'=>trim(\Yii::$app->request->get("search_value")),
+            'search_start'=>\Yii::$app->request->get('search_start'),
+            'search_end'=>\Yii::$app->request->get('search_end'),
+        ];
+        $columnList= Admin::getTableSchema()->columnNames;
+        $models = Admin::SeachModelList($Search_condition,5,$columnList[0],'DESC');
+
+
+        $this->data[ 'models']=$models['lists'];
+        $this->data[ 'pager']=$models['pager'];
+        $this->data[ 'search_condition']=$Search_condition;
+        $this->data[ 'columnList']=$columnList;
+        return $this->render($view,$this->data);
     }
     //新添加一个管理员
     public function actionAdd(){
@@ -198,13 +206,13 @@ class AdminController extends \yii\web\Controller
             ]
         ];
     }
-    /*public function behaviors()
+    public function behaviors()
     {
         return [
             'rbac'=>[
                 'class'=>RbacFilter::className(),
-                'only'=>['index','add','edit','delete','del','log'],
+                'only'=>['add','index','edit','delete','del'],
             ]
         ];
-    }*/
+    }
 }

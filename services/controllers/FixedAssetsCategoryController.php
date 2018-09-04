@@ -2,12 +2,13 @@
 
 namespace services\controllers;
 
+use services\filters\RbacFilter;
 use services\models\CategoryGoods;
 use services\models\FixedAssetsCategory;
 use services\models\Goods;
 use yii\data\Pagination;
 
-class FixedAssetsCategoryController extends \yii\web\Controller
+class FixedAssetsCategoryController extends BaseController
 {
     /*固定资产分类列表*/
     public function actionIndex()
@@ -60,5 +61,14 @@ class FixedAssetsCategoryController extends \yii\web\Controller
             \Yii::$app->session->setFlash('success',"对不起您要删除的数据没有找到(sorry it's not found)");
         }
         return $this->redirect(['fixed-assets-category/index']);
+    }
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'only'=>['add','index','edit','del'],
+            ]
+        ];
     }
 }

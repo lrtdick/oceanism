@@ -9,11 +9,14 @@ class RbacFilter extends ActionFilter{
     {
         //没有登录直接跳转登录
         if(\Yii::$app->user->isGuest){
-            return $action->controller->redirect(\Yii::$app->user->loginUrl)->send();
+            return $action->controller->redirect([\Yii::$app->user->loginUrl]);
         }
         // 路由
         if(!\Yii::$app->user->can($action->uniqueId)){
-            throw new ForbiddenHttpException('对不起，您没有该执行权限');
+            \Yii::$app->session->setFlash('danger','求不起！您没有权限');
+            return $action->controller->redirect(['admin/index1']);
+//            header("Location:www.tianjiao.site/businesses/services/index");
+            /*throw new ForbiddenHttpException('对不起，您没有该执行权限');*/
         }
         //允许
         return parent::beforeAction($action);

@@ -1,5 +1,5 @@
 
-<h1 style="color: #960a0b" class="text-center">Goods Broken Record List</h1>
+<h1 style="color: #960a0b" class="text-center"><?=$buttons['fixed_goods_change_records_title']?></h1>
 <style>
     th{text-align: center}
     td{text-align: center}
@@ -7,13 +7,32 @@
         margin-right: 20px;
     }
 </style>
-<?=\yii\bootstrap\Html::a('添加物品数量变更',['fixed-assets-goods-change-record/add'],['class'=>'btn  btn-success pull-left aaa'])?>
+<?=\yii\bootstrap\Html::a($buttons['common']['add'],['fixed-assets-goods-change-record/add'],['class'=>'btn  btn-success pull-left aaa'])?>
 <form action="" method="get">
-    <div class="input-group col-md-3 pull-left" >
+    <div class="input-group col-1-3 pull-left" >
+<span class="input-group-btn">
+           <button class="btn btn-info btn-search">Search</button>
+</span>
+        <select class="btn" name="search_key"  >
+            <option value="" >
+                <?=$buttons['common']['search_condition']?>
+            </option>
+                <?php foreach ($columnList as $k=>$v):?>
 
-        <span class="input-group-btn">
-           <button class="btn btn-info btn-search">查找</button>
-        </span>
+                   <?php if($v=='id' || $v=='gid') : ?>
+                        <?php else :?>
+                            <option value="<?=$v?>" <?=($search_condition['search_key']==$v)?'selected':''?> >
+                                <?= $v?>
+                            </option>
+
+                    <?php endif ?>
+                <?php endforeach;?>
+            </select>
+        <input class="btn" type="text" name="search_value" value="<?= $search_condition['search_value']?>"/>
+
+        from:<input class="btn" type="date" name="search_start" value="<?= $search_condition['search_start']?>"/>
+        to:<input class="btn" type="date" name="search_end" value="<?= $search_condition['search_end']?>"/>
+
     </div>
     <div class="input-group  pull-left" ><strong> </strong></div>
     <input name="_csrf-backend" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken?>">
@@ -21,47 +40,36 @@
 
 
 <table class="table table-bordered">
+<!--    title-->
     <tr>
-        <th>物品</th>
-        <th>type</th>
-        <th>数量</th>
-        <th>备注</th>
-        <th>创建时间</th>
-        
-        <th>操作</th>
+        <th><?=$buttons['table_title']['action']?></th>
+        <?php foreach ($columnList as $k=>$v):?>
+
+            <td><?=$buttons['table_title'][$v]?></td>
+        <?php endforeach ?>
     </tr>
+    <!--    title-->
+
+<!--    td-->
     <?php foreach ($models as $model):?>
         <tr>
-           <td><?= \services\models\FixedAssetsGoods::getGoods()[$model->gid] ?></td>
-           <td><?= $model->type ?></td>
-            <td><?= $model->amount ?></td>
-            <td><?= $model->remark ?></td>
-            <td><?= date('Y-m-d H:i:s',$model->ctime)?></td>
             <td>
-                <a href="/businesses/services/index/fixed-assets-goods-change-record/del?id=<?=$model->id?>" class="btn btn-sm btn-danger shanchu" title="">删除</a>
+                <a href="/businesses/services/index/fixed-assets-goods-change-record/del?id=<?=$model->id?>" class="btn btn-sm btn-danger " title=""><?=$buttons['common']['del']?></a>
             </td>
+        <?php foreach ($columnList as $k=>$v):?>
+            <?php if($v=='ctime'):?>
+            <td><?= date('Y-m-d H:i:s',$model->ctime)?></td>
+              <?php else:?>
+            <td><?= $model->$v ?></td>
+            <?php endif ?>
+        <?php endforeach ?>
         </tr>
     <?php endforeach;?>
+
+    <!--    td-->
 </table>
 <script src="/businesses/services/index/js/jquery.min.js"></script>
 <script>
-     /*function getSelectText() {
-
-    }*/
-    $('#test').change(function () {
-        var key = $('#test').val();
-       // alert(111);
-        console.log(key);
-       var url ="/businesses/services/index/finance/finance-index?key="+key;
-       var data = {
-            'username':username,
-                'password':password,
-                '_csrf-backend':backend
-        },
-        $.post(url,function (re) {
-            console.log(re);
-        })
-    })
 </script>
 <?php
 //分页工具条

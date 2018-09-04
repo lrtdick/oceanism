@@ -23,7 +23,7 @@
             <td><?= date('Y-m-d',$model->ctime)?></td>
             <td>
                 <?=\yii\bootstrap\Html::a('编辑',['transfer/edit','id'=>$model->id],['class'=>'btn btn-sm btn-info'])?>
-                <a href="/businesses/services/index/transfer/del?id=<?=$model->id?>" class="btn btn-sm btn-danger shanchu" title="">删除</a>
+                <a href="/businesses/services/index/transfer/del?id=<?=$model->id?>" class="btn btn-sm btn-danger " title="">删除</a>
             </td>
         </tr>
     <?php endforeach;?>

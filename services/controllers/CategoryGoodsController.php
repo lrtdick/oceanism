@@ -2,17 +2,18 @@
 
 namespace services\controllers;
 
+use services\filters\RbacFilter;
 use services\models\CategoryGoods;
 use services\models\Goods;
 use yii\data\Pagination;
 
-class CategoryGoodsController extends \yii\web\Controller
+class CategoryGoodsController extends BaseController
 {
     /*商品分类列表*/
     public function actionIndex()
     {
         /*分页条数10*/
-        $query=CategoryGoods::find()->where(['state'=>1]);
+        $query=CategoryGoods::find()->where(['status'=>1]);
         $total=$query->count();
         $pageSize=10;
         $pager=new Pagination([
@@ -51,7 +52,7 @@ class CategoryGoodsController extends \yii\web\Controller
             if($goods){
                 \Yii::$app->session->setFlash('danger','该分类下面有商品！不能删除(delete failed)');
             }else{
-                $model->state=0;
+                $model->status=0;
                 $model->save();
                 \Yii::$app->session->setFlash('success','删除成功(delete success)');
             }
@@ -59,5 +60,14 @@ class CategoryGoodsController extends \yii\web\Controller
             \Yii::$app->session->setFlash('success',"对不起您要删除的数据没有找到(sorry it's not found)");
         }
         return $this->redirect(['category-goods/index']);
+    }
+    public function behaviors()
+    {
+        return [
+            'rbac'=>[
+                'class'=>RbacFilter::className(),
+                'only'=>['add','index','edit','del'],
+            ]
+        ];
     }
 }

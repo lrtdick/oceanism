@@ -17,7 +17,7 @@ use Yii;
  * @property integer $state
  */
 
-class FixedAssetsGoodsChangeRecord extends \yii\db\ActiveRecord
+class FixedAssetsGoodsChangeRecord extends BaseActiveRecord
 {
     /**
      * @inheritdoc

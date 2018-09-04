@@ -8,7 +8,7 @@ use services\models\RoleForm;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
-class RbacController extends \yii\web\Controller
+class RbacController extends BaseController
 {
     //权限列表
     public function actionPermissionIndex()
@@ -144,13 +144,13 @@ class RbacController extends \yii\web\Controller
         \Yii::$app->session->setFlash('danger','删除成功');
         return $this->redirect(['role-index']);
     }
-   /* public function behaviors()
-    {*/
-        /*return [
+    public function behaviors()
+    {
+        return [
             'rbac'=>[
                 'class'=>RbacFilter::className(),
                 'only'=>['permission-index','permission-add','permission-edit','permission-delete','role-index','role-add','role-edit','role-delete'],
             ]
-        ];*/
-   // }
+        ];
+    }
 }
