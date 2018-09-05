@@ -23,7 +23,7 @@
     <?php foreach ($models as $model):?>
         <tr>
             <td><?=$model->admin->username?></td>
-            <td><?=\services\models\Record::type()[$model->type]?></td>
+            <td><?=\services\models\CustomerSpendingRecord::type()[$model->type]?></td>
             <td><?=$model->cny?></td>
             <td><?=$model->peso?></td>
             <td><?=$model->content?></td>

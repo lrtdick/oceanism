@@ -46,7 +46,7 @@ class Goods extends BaseActiveRecord
     {
         return [
             [['category_id', 'gname', 'is_on_sale'], 'required'],
-            [['category_id', 'stock', 'is_on_sale', 'status'], 'integer'],
+            [['category_id', 'is_on_sale', 'status'], 'integer'],
             [['price_cny', 'price_peso','price_agent_cny','price_agent_peso'], 'number'],
             [['gname'], 'string', 'max' => 100],
             [['intro'], 'string', 'max' => 255],

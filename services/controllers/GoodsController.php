@@ -43,7 +43,7 @@ class GoodsController extends BaseController
         $model=new Goods();
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
 
-            $model->ctime=time();
+            $model->created_time=time();
             $model->save();
             \Yii::$app->session->setFlash('success','商品添加成功');
             return $this->redirect(['goods/index']);

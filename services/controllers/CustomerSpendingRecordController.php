@@ -3,17 +3,17 @@
 namespace services\controllers;
 
 use services\filters\RbacFilter;
-use services\models\Record;
+use services\models\CustomerSpendingRecord;
 use yii\data\Pagination;
 
-class RecordController extends BaseController
+class CustomerSpendingRecordController extends BaseController
 {
     /*客服查看某个用户的消费记录*/
     public function actionIndex($order_id)
     {
 
         /*分页条数10*/
-        $query=Record::find()->where(['order_id'=>$order_id]);
+        $query=CustomerSpendingRecord::find()->where(['order_id'=>$order_id]);
         $total=$query->count();
         $pageSize=10;
         $pager=new Pagination([
@@ -21,11 +21,12 @@ class RecordController extends BaseController
             'defaultPageSize'=>$pageSize
         ]);
         $models=$query->limit($pager->limit)->offset($pager->offset)->all();
+
         return $this->render('index',['models'=>$models,'pager'=>$pager,'order_id'=>$order_id]);
     }
     /*客服添加某个人的消费记录*/
     public function actionAdd($order_id){
-        $model=new Record();
+        $model=new CustomerSpendingRecord();
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
             
             $model->admin_id=\Yii::$app->user->getId();
@@ -41,7 +42,7 @@ class RecordController extends BaseController
     public function actionAgentList($order_id)
     {
         /*分页条数10*/
-        $query=Record::find()->where(['pid'=>$order_id,'status'=>1]);
+        $query=CustomerSpendingRecord::find()->where(['pid'=>$order_id,'status'=>1]);
         $total=$query->count();
         $pageSize=10;
         $pager=new Pagination([
@@ -56,7 +57,7 @@ class RecordController extends BaseController
     public function actionIndexAll()
     {
         /*分页条数10*/
-        $query=Record::find()->where(['status'=>1]);
+        $query=CustomerSpendingRecord::find()->where(['status'=>1]);
         $total=$query->count();
         $pageSize=10;
         $pager=new Pagination([
@@ -68,10 +69,10 @@ class RecordController extends BaseController
     }
     /*删除一条消费记录*/
     public function actionDel(){
-        $record=Record::findOne(['id'=>\Yii::$app->request->get('id')]);
-        if($record){
-            $record->status=0;
-            $record->save();
+        $CustomerSpendingRecord=CustomerSpendingRecord::findOne(['id'=>\Yii::$app->request->get('id')]);
+        if($CustomerSpendingRecord){
+            $CustomerSpendingRecord->status=0;
+            $CustomerSpendingRecord->save();
             \Yii::$app->session->setFlash('success','成功删除一条消费记录');
         }else{
             \Yii::$app->session->setFlash('danger','消费记录删除失败');
@@ -80,7 +81,7 @@ class RecordController extends BaseController
     }
     /*单独添加一条消费记录*/
     public function actionAddOne(){
-        $model=new Record();
+        $model=new CustomerSpendingRecord();
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
             $model->rid=\Yii::$app->user->getId();
             $model->created_time=time();
@@ -94,7 +95,7 @@ class RecordController extends BaseController
     public function actionAgentIndex(){
         $userid=\Yii::$app->user->identity->getId();
         /*分页条数10*/
-        $query=Record::find()->where(['status'=>1,'rid'=>$userid]);
+        $query=CustomerSpendingRecord::find()->where(['status'=>1,'rid'=>$userid]);
         $total=$query->count();
         $pageSize=10;
         $pager=new Pagination([

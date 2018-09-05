@@ -13,7 +13,7 @@ class CategoryGoodsController extends BaseController
     public function actionIndex()
     {
         /*分页条数10*/
-        $query=CategoryGoods::find()->where(['state'=>1]);
+        $query=CategoryGoods::find()->where(['status'=>1]);
         $total=$query->count();
         $pageSize=10;
         $pager=new Pagination([
@@ -52,7 +52,7 @@ class CategoryGoodsController extends BaseController
             if($goods){
                 \Yii::$app->session->setFlash('danger','该分类下面有商品！不能删除(delete failed)');
             }else{
-                $model->state=0;
+                $model->status=0;
                 $model->save();
                 \Yii::$app->session->setFlash('success','删除成功(delete success)');
             }

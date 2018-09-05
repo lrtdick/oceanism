@@ -52,7 +52,7 @@
 <table class="table table-bordered">
     <tr>
         <th><?=$buttons['common']['action']?></th>
-        <th><?=$buttons['table_title']['state']?></th>
+        <th><?=$buttons['table_title']['status']?></th>
         <?php foreach ($columnList as $k=>$v):?>
 
             <td><?=isset($buttons['table_title'][$v])?$buttons['table_title'][$v]:$v?></td>
@@ -68,11 +68,11 @@
             </td>
             <td>
                 <?php
-                if($model->state==1 && !$model->checkin_time){
+                if($model->status==1 && !$model->checkin_time){
                     echo'<span style="color: red;width: 20%;height: 20px;font-size: 12px">未到店</span>';
-                }elseif($model->state==2){
+                }elseif($model->status==2){
                     echo '<span style="color: red;width: 20%;height: 20px;font-size: 12px">已离店</span>';
-                }elseif($model->state==3){
+                }elseif($model->status==3){
                     echo '<span style="color: red;width: 20%;height: 20px;font-size: 12px">已取消</span>';
                 }
                 ?>

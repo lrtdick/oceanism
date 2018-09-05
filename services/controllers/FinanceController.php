@@ -16,7 +16,7 @@ class FinanceController extends BaseController {
 	    //$rs = new FinanceSystem();
 //        $key = \Yii::$app->request->get('key');
         $key='';
-        $rs = FinanceSystem::find()->where(['state'=>1]);
+        $rs = FinanceSystem::find()->where(['status'=>1]);
         if(\Yii::$app->request->get('key')){
             $rs->where(['collect'=>\Yii::$app->request->get('key')]);
             $key=\Yii::$app->request->get('key');
@@ -67,7 +67,7 @@ class FinanceController extends BaseController {
 	
 	public function actionDel($id){
 		 $model = FinanceSystem::findOne(['id'=>$id]);
-        $model->state=0;
+        $model->status=0;
         $model->save();
         return $this->redirect(['finance/finance-index']);
 	}

@@ -73,13 +73,13 @@
 
                     }
 //                    已到店
-                }elseif($model->status==2 && isset($model->checkin_time)){
+                }elseif( isset($model->checkin_time)){
                     //checkout
                     echo \yii\bootstrap\Html::a($buttons['common']['checkout'],['settle-accounts/index','id'=>$model->id],['class'=>'btn btn-xs btn-info check']);
                 }
                 //消费记录
                 ?>
-                <?=\yii\bootstrap\Html::a($buttons['common']['view_consume_record'],['record/index','order_id'=>$model->id],['class'=>'btn btn-xs btn-success'])?>
+                <?=\yii\bootstrap\Html::a($buttons['common']['view_consume_record'],['customer-spending-record/index','order_id'=>$model->id],['class'=>'btn btn-xs btn-success'])?>
 <!--                //预定商品记录-->
                 <?=\yii\bootstrap\Html::a($buttons['common']['view_booking_goods'],['booking-goods/index','order_id'=>$model->id],['class'=>'btn btn-xs btn-success'])?>
             </td>
@@ -97,7 +97,12 @@
 <!--            INFO-->
 
             <?php foreach ($columnList as $k=>$v):?>
-                <?php if($v =='booking_time'||$v =='plan_checkin_time'||$v =='plan_checkout_time'):?>
+                <?php if($v =='booking_time'
+                    ||$v =='plan_checkin_time'
+                    ||$v =='plan_checkout_time'
+                    ||$v =='checkin_time'
+                    ||$v =='checkout_time'
+                ):?>
                     <td><?= date('Y-m-d',$model->$v )?></td>
 
                 <?php else:?>

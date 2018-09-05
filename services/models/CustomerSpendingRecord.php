@@ -21,14 +21,14 @@ use yii\helpers\ArrayHelper;
  * @property integer $created_time
  */
 
-class Record extends \yii\db\ActiveRecord
+class CustomerSpendingRecord extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'ktz_guest_spending_record';
+        return 'ktz_customer_spending_record';
     }
 
     /**
