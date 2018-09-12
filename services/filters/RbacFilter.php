@@ -13,8 +13,9 @@ class RbacFilter extends ActionFilter{
         }
         // 路由
         if(!\Yii::$app->user->can($action->uniqueId)){
-            \Yii::$app->session->setFlash('danger','求不起！您没有权限');
-            return $action->controller->redirect(['admin/index1']);
+            \Yii::$app->session->setFlash('danger','对不起！您没有权限Require Access');
+//            throw new ForbiddenHttpException('对不起，您没有该执行权限');
+            return $action->controller->redirect(['index/noaccess']);
 //            header("Location:www.tianjiao.site/businesses/services/index");
             /*throw new ForbiddenHttpException('对不起，您没有该执行权限');*/
         }

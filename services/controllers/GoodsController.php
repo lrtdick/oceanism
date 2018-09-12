@@ -26,10 +26,6 @@ class GoodsController extends BaseController
         ];
         $columnList= Goods::getTableSchema()->columnNames;
         $models = Goods::SeachModelList($Search_condition,10,$columnList[0],'DESC');
-
-
-
-
         $this->data[ 'models']=$models['lists'];
         $this->data[ 'pager']=$models['pager'];
         $this->data[ 'search_condition']=$Search_condition;
@@ -58,7 +54,7 @@ class GoodsController extends BaseController
     public function actionEdit($id){
         $model=Goods::findOne($id);
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
-            $model->ctime=time();
+            $model->created_time=time();
             $model->save();
             \Yii::$app->session->setFlash('info','商品修改成功');
             return $this->redirect(['goods/index']);

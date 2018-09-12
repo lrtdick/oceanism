@@ -16,6 +16,12 @@ use Yii;
 
 class AdminController extends BaseController
 {
+    public function actionIndex1(
+
+
+    ){
+        var_dump( 'ADMININDE1');
+    }
     //用户列表
     public function actionIndex()
     {
@@ -32,7 +38,6 @@ class AdminController extends BaseController
         ];
         $columnList= Admin::getTableSchema()->columnNames;
         $models = Admin::SeachModelList($Search_condition,5,$columnList[0],'DESC');
-
 
         $this->data[ 'models']=$models['lists'];
         $this->data[ 'pager']=$models['pager'];
@@ -67,6 +72,7 @@ class AdminController extends BaseController
     }
     //修改一条管理员信息
     public function actionEdit($id){
+//        $this->dd($id);
         $model =Admin::findOne(['id'=>$id]);
         $authManager=\Yii::$app->authManager;
         if($model->load(\Yii::$app->request->post()) && $model->validate() ){
@@ -92,6 +98,7 @@ class AdminController extends BaseController
         $roles = $authManager->getAssignments($id);
         //var_dump($roles);exit;
         $model->role = ArrayHelper::map($roles,'roleName','roleName');
+//        $this->dd($id);
         return $this->render('add', ['model' => $model]);
     }
     //禁用一位用户
@@ -189,9 +196,6 @@ class AdminController extends BaseController
         ]);
         $models=$query->limit($pager->limit)->offset($pager->offset)->orderBy('created_time desc')->all();
         return $this->render('log',['models'=>$models,'pager'=>$pager,'beginTime'=>$beginTime,'endTime'=>$endTime]);
-    }
-    public function actionIndex1(){
-        return $this->render('index1');
     }
     //定义验证码操作
     public function actions()

@@ -3,6 +3,7 @@
 namespace services\models;
 
 use Yii;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "booking".
@@ -75,4 +76,58 @@ class BookingRecord extends BaseActiveRecord
     public static function getAdmin(){
         return Admin::find()->where(['status'=>1])->asArray()->all();
     }
+
+
+    public static function SeachAgentBoookingRecordList(
+        $Search_condition=[
+            'search_key'=>null,
+            'search_value'=>null,
+            'search_start'=>'',
+            'search_end'=>'',
+        ],
+        $perPage=6,
+        $orderKey='id',
+        $orderSort='DESC'
+    )
+    {
+        $user_id=\Yii::$app->user->identity->getId();//代理商id
+        $query=BookingRecord::find()->where(['user_id'=>$user_id]);
+
+        if($Search_condition['search_key']!=null && $Search_condition['search_value']!=null)
+        {
+            $query->andwhere([
+                'like',
+                $Search_condition['search_key'],
+                $Search_condition['search_value']
+            ]);
+        }
+        if($Search_condition['search_start']!=''){
+            $startdate=$Search_condition['search_start'];
+            $query->andwhere(['>','created_time',strtotime($startdate)]);
+
+
+        }
+
+        if($Search_condition['search_end']!=''){
+            $enddate=$Search_condition['search_end'];
+            $query ->andWhere(['<','created_time',strtotime($enddate)+24*60*60]);
+        }
+        $total = $query->count();
+        //每页显示条数 3
+        //分页工具类
+        $pager = new Pagination([
+            'totalCount'=>$total,
+            'defaultPageSize'=>$perPage
+        ]);
+        $lists=$query->limit($pager->limit)->offset($pager->offset)->orderBy($orderKey.' '.$orderSort)->all();
+        $models=[
+            'pager'=>$pager,
+            'lists'=>$lists,
+
+        ];
+        return $models;
+
+
+    }
+
 }

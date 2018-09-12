@@ -1,4 +1,4 @@
-<h1 class="text-center"><?=$buttons['page_title']['agent_booking_list']?></h1>
+<h1 class="text-center"><?=$buttons['page_title']['agent_booking_record_list']?></h1>
 
 <!--<p class="text-center">--><?//=$buttons['tips']['agent_booking_list']?><!--</p>-->
 
@@ -10,7 +10,7 @@
     td{text-align: center}
     .btn{margin: 2px}
 </style>
-<?=\yii\bootstrap\Html::a($buttons['common']['add'],['booking/agent-add'],['class'=>'btn btn-sm btn-success pull-left'])?>
+<?=\yii\bootstrap\Html::a($buttons['common']['add'],['booking-record/agent-add'],['class'=>'btn btn-sm btn-success pull-left'])?>
 <link rel="stylesheet" href="/businesses/services/index/css/flatpickr.min.css" />
 <script src="/businesses/services/index/js/flatpickr.min.js"></script>
 <script src="/businesses/services/index/js/flatpickr.l10n.zh.js"></script>
@@ -64,7 +64,7 @@
     <?php foreach ($models as $model):?>
         <tr>
             <td>
-                <?=\yii\bootstrap\Html::a($buttons['common']['view_booking_goods'],['booking-goods/agent-index','id'=>$model->id],['class'=>'btn btn-xs btn-success'])?>
+               <?=\yii\bootstrap\Html::a($buttons['common']['view_booking_goods'],['booking-goods/agent-index','order_id'=>$model->id],['class'=>'btn btn-xs btn-success'])?>
             </td>
             <td>
                 <?php

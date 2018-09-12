@@ -5,7 +5,9 @@
         $form=\yii\bootstrap\ActiveForm::begin();
         echo $form->field($model,'passport');
         echo $form->field($model,'wechat');
-        echo $form->field($model,'username');
+        echo $form->field($model,'name');
+        echo $form->field($model,'deposit_cny');
+        echo $form->field($model,'deposit_peso');
         echo $form->field($model,'plan_checkin_time')->textInput(['placeholder' =>'yyyy-mm-dd Only']);
         echo $form->field($model,'plan_checkout_time')->textInput(['placeholder' =>'yyyy-mm-dd Only']);
         echo $form->field($model,'remark')->textarea(['rows'=>10,'cols'=>10]);

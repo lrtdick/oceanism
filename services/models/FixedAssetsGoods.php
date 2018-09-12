@@ -72,13 +72,13 @@ class FixedAssetsGoods extends BaseActiveRecord
     /*获取所有未删除的分类*/
     public static function getCategory()
     {
-        return ArrayHelper::merge(['' => 'choose goods category'], ArrayHelper::map(FixedAssetsCategory::findAll(['state' => 1]), 'id', 'cname'));
+        return ArrayHelper::merge(['' => '选择Choose'], ArrayHelper::map(FixedAssetsCategory::findAll(['state' => 1]), 'id', 'cname'));
     }
 
     /*获取所有未删除的物品*/
     public static function getGoods()
     {
-        return ArrayHelper::merge(['' => 'choose goods name'], ArrayHelper::map(FixedAssetsGoods::findAll(['state' => 1]), 'id', 'gname'));
+        return ArrayHelper::merge(['' => '选择Choose'], ArrayHelper::map(FixedAssetsGoods::findAll(['state' => 1]), 'id', 'gname'));
     }
 
 

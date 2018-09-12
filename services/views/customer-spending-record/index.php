@@ -1,4 +1,4 @@
-<h1 class="text-center">消费记录(Records of consumption)</h1>
+<h1 class="text-center">消费记录(Customer Bill Record)</h1>
 <style>
     h1{color: #960a0b;margin: 5px 20px 50px 20px}
     th{text-align: center}
@@ -6,7 +6,7 @@
 </style>
 <!--预定记录要是已到店才有增加消费记录功能-->
 <?php if(\services\models\BookingRecord::findOne($order_id)->checkin_time && \services\models\BookingRecord::findOne($order_id)->status==2):?>
-<?=\yii\bootstrap\Html::a('添加消费记录',['record/add','order_id'=>$order_id],['class'=>'btn btn-sm btn-success pull-left'])?>
+<?=\yii\bootstrap\Html::a('添加消费记录',['customer-spending-record/add','order_id'=>$order_id],['class'=>'btn btn-sm btn-success pull-left'])?>
 <?php endif;?>
 &nbsp;<input type="button" name="Submit" value="返回上一页"  class="btn btn-sm btn-success" onclick="javascript:window.history.back(-1);">
 <table class="table table-bordered">
@@ -30,8 +30,8 @@
             <td><?=$model->remark?></td>
             <td><?=$model->created_time?date('Y-m-d H:i:s',$model->created_time):''?></td>
             <td>
-                <?php if(Yii::$app->user->can('record/del') && \services\models\BookingRecord::findOne($order_id)->status==1):?>
-                    <a href="#" class="btn btn-sm btn-danger shanchu" title="/businesses/services/index/record/del?id=<?=$model->id?>">delete</a>
+                <?php if(Yii::$app->user->can('customer-spending-record/del') && \services\models\BookingRecord::findOne($order_id)->status==1):?>
+                    <a href="#" class="btn btn-sm btn-danger shanchu" title="/businesses/services/index/customer-spending-record/del?id=<?=$model->id?>">delete</a>
                 <?php else:?>
                     <span style="color: red;width: 20%;height: 20px;font-size: 12px">
                         <?php

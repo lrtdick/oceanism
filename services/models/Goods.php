@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $id
  * @property integer $category_id
- * @property string $gname
+ * @property string $goods_name
  * @property string $intro
  * @property string $specification
  * @property string $unit
@@ -45,10 +45,10 @@ class Goods extends BaseActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'gname', 'is_on_sale'], 'required'],
+            [['category_id', 'goods_name', 'is_on_sale'], 'required'],
             [['category_id', 'is_on_sale', 'status'], 'integer'],
             [['price_cny', 'price_peso','price_agent_cny','price_agent_peso'], 'number'],
-            [['gname'], 'string', 'max' => 100],
+            [['goods_name'], 'string', 'max' => 100],
             [['intro'], 'string', 'max' => 255],
         ];
     }
@@ -61,7 +61,7 @@ class Goods extends BaseActiveRecord
         return [
             'id' => 'ID',
             'category_id' => '所属分类(Category)',
-            'gname' => '商品名称(Gname)',
+            'goods_name' => '商品名称(Name)',
             'intro' => '商品简介(Intro)',
             'stock' => '数量(Stock)',
             'price_cny' => '挂牌价(Price CNY)',

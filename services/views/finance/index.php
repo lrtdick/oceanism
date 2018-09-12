@@ -31,13 +31,12 @@
 
 <table class="table table-bordered">
     <tr>
-        <th>总汇</th>
+        <th>类型(Type)</th>
         <th>人民币(CNY)</th>
-        <th>比索(POSE)</th>
-        <th>备注</th>
-        <th>创建时间</th>
-        
-        <th>操作</th>
+        <th>比索(PESO)</th>
+        <th>备注(Remark)</th>
+        <th>创建时间(Time)</th>
+        <th>操作(Option)</th>
     </tr>
     <?php foreach ($models as $model):?>
         <tr>

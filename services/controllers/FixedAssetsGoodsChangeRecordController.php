@@ -77,13 +77,18 @@ class FixedAssetsGoodsChangeRecordController extends BaseController
 	
 	public function actionDel($id){
 		 $model = FixedAssetsGoodsChangeRecord::findOne(['id'=>$id]);
-        $model->state=0;
-        $model->save();
+
         //修改时先撤销数量改变
         $minus=$model->amount;
         $good = FixedAssetsGoods::findOne(['id'=>$model->gid]);
-        $good->stock -= $minus;
-        $good->save(false);
+        if( $model->status!=0){
+            $good->stock -= $minus;
+            $good->save(false);
+        }
+
+
+        $model->status=0;
+        $model->save();
         \Yii::$app->session->setFlash('success','删除');
         return $this->redirect(['fixed-assets-goods-change-record/index']);
 	}

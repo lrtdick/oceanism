@@ -5,6 +5,7 @@ namespace services\controllers;
 use services\filters\RbacFilter;
 use services\models\BookingRecord;
 use services\models\BookingGoods;
+use services\models\Goods;
 use Yii;
 use yii\data\Pagination;
 
@@ -57,19 +58,7 @@ class BookingGoodsController extends BaseController
         return $this->render($view,$this->data);
     }
 
-    /*客服查看所有预定商品*/
-    public function actionBookingGoodsIndex(){
-        /*分页条数10*/
-        $query=BookingGoods::find();
-        $total=$query->count();
-        $pageSize=10;
-        $pager=new Pagination([
-            'totalCount'=>$total,
-            'defaultPageSize'=>$pageSize
-        ]);
-        $models=$query->limit($pager->limit)->offset($pager->offset)->orderBy('id desc')->all();
-        return $this->render('booking_goods_index',['models'=>$models,'pager'=>$pager]);
-    }
+
 
 
     /*商品预定 done*/
@@ -77,32 +66,36 @@ class BookingGoodsController extends BaseController
         //固定部分
         $view= Yii::$app->controller->action->id;
 
-
         $model=new BookingGoods();
         $request=\Yii::$app->request;
-        $model->order_id=$order_id;
         if($request->post()){
-            $goods_name=$request->post('goods_name');
+           /* var_dump($request->post());
+                exit();*/
             $goods_amount=$request->post('goods_amount');
-            $cny=$request->post('cny');
-            $peso=$request->post('peso');
             $goods_id=$request->post('id');
-            $user_id=\Yii::$app->user->identity->getId();
-            if($goods_name && $goods_amount && isset($cny) && isset($peso) && $goods_id && $user_id){
-                foreach($goods_name as $k=>$name){
-                    $goods=clone $model;
-                    $goods->user_id=$user_id;
-                    $goods->goods_name=$name;
-                    $goods->goods_amount=$goods_amount[$k];
-                    $goods->goods_id=$goods_id[$k];
-                    $goods->cny=$cny[$k];
-                    $goods->peso=$peso[$k];
-                    $goods->cny_total=$cny[$k]*$goods_amount[$k];
-                    $goods->peso_total=$peso[$k]*$goods_amount[$k];
-                    $goods->booking_time=time();
-                    $goods->status=1;
+//            $this->dd($request->post());
 
-                    $goods->save(false);
+            $user_id=\Yii::$app->user->identity->getId();
+            if(  $user_id
+                &&count($goods_id)>0
+                &&count($goods_amount)>0
+                && count($goods_id)==count($goods_amount)
+            ){
+                foreach($goods_id as $k=>$good_id){
+                    $bookingGoodsModel=new BookingGoods();
+                    $bookingGoodsModel->order_id=$order_id;
+                    $goodInfo=Goods::findOne(['id'=>$good_id]);
+                    $bookingGoodsModel->user_id=$user_id;
+                    $bookingGoodsModel->goods_id=$good_id;
+                    $bookingGoodsModel->goods_name=$goodInfo->goods_name;
+                    $bookingGoodsModel->goods_amount=$goods_amount[$k];
+                    $bookingGoodsModel->cny=$goodInfo->price_cny;
+                    $bookingGoodsModel->peso=$goodInfo->price_peso;
+                    $bookingGoodsModel->cny_total= $goodInfo->price_cny*$goods_amount[$k];
+                    $bookingGoodsModel->peso_total=$goodInfo->price_peso*$goods_amount[$k];
+                    $bookingGoodsModel->booking_time=time();
+                    $bookingGoodsModel->status=1;
+                    $bookingGoodsModel->save(false);
                 }
                 \Yii::$app->session->setFlash('success','商品预定成功');
                 return "<script>window.history.go(-2);</script>";
@@ -115,22 +108,51 @@ class BookingGoodsController extends BaseController
     }
 
 
+    /*商品预定 done*/
+    public function actionAgentAdd($order_id){
+        //固定部分
+        $view= Yii::$app->controller->action->id;
 
+        $model=new BookingGoods();
+        $request=\Yii::$app->request;
+        if($request->post()){
+            /* var_dump($request->post());
+                 exit();*/
+            $goods_amount=$request->post('goods_amount');
+            $goods_id=$request->post('id');
+//            $this->dd($request->post());
 
-    /*代理商预定商品列表*/
-    public function actionAgentBookingGoodsList($id){
-        /*分页条数10*/
-        $query=BookingGoods::find()->where(['pid'=>$id]);
-        $total=$query->count();
-        $pageSize=10;
-        $pager=new Pagination([
-            'totalCount'=>$total,
-            'defaultPageSize'=>$pageSize
-        ]);
-        $models=$query->limit($pager->limit)->offset($pager->offset)->orderBy('id desc')->all();
-        return $this->render('agent_booking_goods_list',['models'=>$models,'pager'=>$pager,'id'=>$id]);
+            $user_id=\Yii::$app->user->identity->getId();
+            if(  $user_id
+                &&count($goods_id)>0
+                &&count($goods_amount)>0
+                && count($goods_id)==count($goods_amount)
+            ){
+                foreach($goods_id as $k=>$good_id){
+                    $bookingGoodsModel=new BookingGoods();
+                    $bookingGoodsModel->order_id=$order_id;
+                    $goodInfo=Goods::findOne(['id'=>$good_id]);
+                    $bookingGoodsModel->user_id=$user_id;
+                    $bookingGoodsModel->goods_id=$good_id;
+                    $bookingGoodsModel->goods_name=$goodInfo->goods_name;
+                    $bookingGoodsModel->goods_amount=$goods_amount[$k];
+                    $bookingGoodsModel->cny=$goodInfo->price_agent_cny;
+                    $bookingGoodsModel->peso=$goodInfo->price_agent_peso;
+                    $bookingGoodsModel->cny_total= $goodInfo->price_agent_cny*$goods_amount[$k];
+                    $bookingGoodsModel->peso_total=$goodInfo->price_agent_peso*$goods_amount[$k];
+                    $bookingGoodsModel->booking_time=time();
+                    $bookingGoodsModel->status=1;
+                    $bookingGoodsModel->save(false);
+                }
+                \Yii::$app->session->setFlash('success','商品预定成功');
+                return "<script>window.history.go(-2);</script>";
+            }else{
+                \Yii::$app->session->setFlash('danger','请填写完整数据后提交');
+                return "<script>window.history.go(-1);</script>";
+            }
+        }
+        return $this->render($view,['model'=>$model]);
     }
-
 
 
     /*取消预定商品done*/
@@ -146,6 +168,20 @@ class BookingGoodsController extends BaseController
         return "<script>window.history.go(-1);</script>";
     }
 
+    /*客服查看所有预定商品*/
+    public function actionBookingGoodsIndex(){
+        /*分页条数10*/
+        return 'actionBookingGoodsIndex';
+        $query=BookingGoods::find();
+        $total=$query->count();
+        $pageSize=10;
+        $pager=new Pagination([
+            'totalCount'=>$total,
+            'defaultPageSize'=>$pageSize
+        ]);
+        $models=$query->limit($pager->limit)->offset($pager->offset)->orderBy('id desc')->all();
+        return $this->render('booking_goods_index',['models'=>$models,'pager'=>$pager]);
+    }
 
     public function behaviors()
     {
@@ -156,9 +192,8 @@ class BookingGoodsController extends BaseController
                     'index',
                     'agent-index',
                     'add',
-                    'agent-add',
+//                    'agent-add',
                     'checkin',
-                    'del',
                     'cancel',
                     'del',
                 ],

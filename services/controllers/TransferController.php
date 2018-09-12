@@ -67,38 +67,24 @@ class TransferController extends BaseController{
 
     public function actionProperty(){
 
-
-
         //修改原始金额
         if(\Yii::$app->request->get('rmb')){
 
             //echo 111;exit;
-
             $model = OriginalAmount::findOne(['id'=>1]);
-
             $model->cny = \Yii::$app->request->get('rmb');
-
             $model->save();
-
-
             \Yii::$app->session->setFlash('success','修改成功');
-
             return  $this->redirect('property');
-
         }
 
         if(\Yii::$app->request->get('peso')){
 
             //echo 111;exit;
-
             $model = OriginalAmount::findOne(['id'=>1]);
-
             $model['peso'] = \Yii::$app->request->get('peso');
-
             $model->save();
-
             \Yii::$app->session->setFlash('success','修改成功');
-
             return  $this->redirect('property');
 
         }
@@ -110,14 +96,14 @@ class TransferController extends BaseController{
 
         $startdate='';
         $enddate='';
-        $select2=FinanceSystem::find()->where(['state'=>1]);
-        $select3=FinanceSystem::find()->where(['state'=>1]);
+        $select2=FinanceSystem::find()->where(['status'=>1]);
+        $select3=FinanceSystem::find()->where(['status'=>1]);
         //start time
         if(\Yii::$app->request->get('startdate')){
 
             $startdate=\Yii::$app->request->get('startdate');
             //select1
-            $select1=FinanceSystem::find()->where(['state'=>1])->andwhere(['<','ctime',strtotime($startdate)]);
+            $select1=FinanceSystem::find()->where(['status'=>1])->andwhere(['<','ctime',strtotime($startdate)]);
 
             //select1净收入
             $select1cny1 =abs($select1->sum('rmb')) ;
@@ -130,7 +116,6 @@ class TransferController extends BaseController{
 
 
         }
-
         //有endtime
         if(\Yii::$app->request->get('enddate')){
 
@@ -140,7 +125,6 @@ class TransferController extends BaseController{
             $select3=  $select3->andWhere(['<','ctime',strtotime($enddate)+24*60*60]);
 
         }
-
 
         //原始资产
         $Original_cny =floatval(OriginalAmount::find()->one()->cny) ;

@@ -45,20 +45,20 @@ class FixedAssetsGoodsChangeRecord extends BaseActiveRecord
     {
         return [
             'id' => 'ID',
-            'gid' => 'GoodsID',
-            'type' => 'How',
-            'amount' => 'amount',
-            'remark' => 'remark',
+            'gid' => '选择物品selectGoods',
+            'type' => '类型Type',
+            'amount' => '数量Amount',
+            'remark' => '备注remark',
         ];
     }
 
     public static function getType(){
             return [
-                0=>'Buy',
-                1=>'Broken',
-                2=>'Gone missing',
-                3=>'Use up',
-                4=>'Abrase'
+                0=>'购买Buy',
+                1=>'损坏Broken',
+                2=>'丢失Lost',
+                3=>'用光Use up',
+                4=>'磨损Abrase'
                 ];
 
 

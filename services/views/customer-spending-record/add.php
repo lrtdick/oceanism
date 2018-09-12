@@ -2,7 +2,7 @@
     <div class="show-img-box">
         <?php
         $form=\yii\bootstrap\ActiveForm::begin();
-        echo $form->field($model,'type')->dropDownList(\services\models\Record::type1());
+        echo $form->field($model,'type')->dropDownList(\services\models\CustomerSpendingRecord::type1());
         echo $form->field($model,'cny');
         echo $form->field($model,'peso');
         echo $form->field($model,'content')->textarea(['rows'=>10,'cols'=>10]);

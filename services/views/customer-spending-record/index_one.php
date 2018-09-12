@@ -1,4 +1,4 @@
-<h1 class="text-center">消费记录(Records of consumption)</h1>
+<h1 class="text-center">消费记录(Records of Money)</h1>
 <style>
     h1{color: #960a0b;margin: 5px 20px 50px 20px}
     th{text-align: center}
@@ -6,7 +6,7 @@
 </style>
 <table class="table table-bordered">
     <tr>
-        <th>操作人</th>
+        <th>操作人(Emploee)</th>
         <th>姓名(Username)</th>
         <th>护照(Passport)</th>
         <th>手机号(Tel)</th>

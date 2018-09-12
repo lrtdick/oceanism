@@ -152,7 +152,7 @@ AppAsset::register($this);
                                     </ul>
                                 </li>
                                 <?php endif;?>
-                                <?php if(Yii::$app->user->can('booking/index') || Yii::$app->user->can('booking/agent-booking') || Yii::$app->user->can('consume-type/index')):?>
+                                <?php if(Yii::$app->user->can('booking-record/index') || Yii::$app->user->can('booking-record/agent-index') || Yii::$app->user->can('consume-type/index')):?>
                                 <li class="sidebar-nav-link">
                                     <a href="#" class="sidebar-nav-sub-title">
                                         <i class="am-icon-codepen sidebar-nav-link-logo"></i>预定管理
@@ -166,13 +166,13 @@ AppAsset::register($this);
                                             </a>
                                         </li>
                                         <?php endif;?>
-<!--                                        --><?php //if(Yii::$app->user->can('booking/agent-index')):?>
+                                        <?php if(Yii::$app->user->can('booking-record/agent-index')):?>
                                             <li class="sidebar-nav-link">
                                                 <a href="/businesses/services/index/booking-record/agent-index" target="main_iframe">
                                                     <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 预定列表(代理商)
                                                 </a>
                                             </li>
-<!--                                        --><?php //endif;?>
+                                        <?php endif;?>
                                         <?php if(Yii::$app->user->can('consume-type/index')):?>
                                             <li class="sidebar-nav-link">
                                                 <a href="/businesses/services/index/consume-type/index" target="main_iframe">
@@ -325,7 +325,7 @@ AppAsset::register($this);
     <!-- 内容区域 -->
     <div class="iframe-box">
         <?= Alert::widget() ?>
-        <iframe src="/businesses/services/index/admin/index1" id="main_iframe" class="main_iframe" name="main_iframe" frameborder="0" onload="" scrolling="yes" style="padding: 1px"></iframe>
+        <iframe src="/businesses/services/index/admin/index" id="main_iframe" class="main_iframe" name="main_iframe" frameborder="0" onload="" scrolling="yes" style="padding: 1px"></iframe>
     </div>
     <script src="/businesses/services/index/js/echarts.min.js"></script>
     <script src="/businesses/services/index/js/jquery.min.js"></script>

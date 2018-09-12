@@ -31,7 +31,6 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
         $orderSort='DESC'
     )
     {
-
         $query=self::find();
 
         if($Search_condition['search_key']!=null && $Search_condition['search_value']!=null)
@@ -44,14 +43,14 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
         }
         if($Search_condition['search_start']!=''){
             $startdate=$Search_condition['search_start'];
-            $query->andwhere(['>','ctime',strtotime($startdate)]);
+            $query->andwhere(['>','created_time',strtotime($startdate)]);
 
 
         }
 
         if($Search_condition['search_end']!=''){
             $enddate=$Search_condition['search_end'];
-            $query ->andWhere(['<','ctime',strtotime($enddate)+24*60*60]);
+            $query ->andWhere(['<','created_time',strtotime($enddate)+24*60*60]);
         }
         $total = $query->count();
         //每页显示条数 3

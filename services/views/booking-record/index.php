@@ -75,7 +75,7 @@
 //                    已到店
                 }elseif( isset($model->checkin_time)){
                     //checkout
-                    echo \yii\bootstrap\Html::a($buttons['common']['checkout'],['settle-accounts/index','id'=>$model->id],['class'=>'btn btn-xs btn-info check']);
+                    echo \yii\bootstrap\Html::a($buttons['common']['checkout'],['checkout/index','id'=>$model->id],['class'=>'btn btn-xs btn-info check']);
                 }
                 //消费记录
                 ?>

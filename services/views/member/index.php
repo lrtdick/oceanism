@@ -23,7 +23,7 @@
                 <?=\yii\bootstrap\Html::a('消费记录',['record/index','passport'=>$model->passport,'tel'=>$model->tel,'username'=>$model->username],['class'=>'btn btn-sm btn-success'])?>
                 <?=\yii\bootstrap\Html::a('查看预订单',['booking/member-booking','passport'=>$model->passport],['class'=>'btn btn-sm btn-success'])?>
                 <?=\yii\bootstrap\Html::a('查看预订商品',['booking/booking-goods-list','passport'=>$model->passport],['class'=>'btn btn-sm btn-success'])?>
-                <?//=\yii\bootstrap\Html::a('结账',['settle-accounts/index','passport'=>$model->passport],['class'=>'btn btn-sm btn-danger check'])?>
+                <?//=\yii\bootstrap\Html::a('结账',['checkout/index','passport'=>$model->passport],['class'=>'btn btn-sm btn-danger check'])?>
             </td>
         </tr>
     <?php endforeach;?>

@@ -26,8 +26,6 @@
             </td>
 
             <?php foreach ($columnList as $k=>$v):?>
-
-
                     <?php if($v=='created_time'):?>
                         <td><?= date('Y-m-d',$model->created_time)?></td>
                     <?php elseif($v=='is_on_sale'):?>

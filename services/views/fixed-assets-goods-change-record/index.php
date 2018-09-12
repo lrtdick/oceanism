@@ -1,5 +1,5 @@
 
-<h1 style="color: #960a0b" class="text-center"><?=$buttons['fixed_goods_change_records_title']?></h1>
+<h1 style="color: #960a0b" class="text-center"><?=$buttons['page_title']['fixed_goods_change_records_title']?></h1>
 <style>
     th{text-align: center}
     td{text-align: center}

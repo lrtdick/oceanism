@@ -24,7 +24,7 @@ class FinanceSystem extends ActiveRecord {
   public function attributeLabels()
   {
       return [
-         'collect'=>'总汇(collect)',
+         'collect'=>'类型(collect)',
           'rmb' =>'人民币(CNY)',
           'peso'=> '比索(PESO)',
           'comment'  => '备注信息(Comment)',

@@ -17,19 +17,21 @@ class IndexController extends BaseController
     public function actionIndex(){
         if(\Yii::$app->user->isGuest){
 
-
             return $this->redirect(['admin/login']);
         }
 
-
         $buttons=$this->BaseButton['zh'];
-
         return $this->render('index',
             [
                 'buttons'=>$buttons,
             ]
         );
 
+
+    }
+
+    public function actionNoaccess(){
+        return $this->render('Noaccess');
 
     }
 }

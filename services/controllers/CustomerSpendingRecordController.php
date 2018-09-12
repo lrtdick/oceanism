@@ -5,12 +5,16 @@ namespace services\controllers;
 use services\filters\RbacFilter;
 use services\models\CustomerSpendingRecord;
 use yii\data\Pagination;
+use Yii;
 
 class CustomerSpendingRecordController extends BaseController
 {
     /*客服查看某个用户的消费记录*/
     public function actionIndex($order_id)
     {
+
+        //固定部分
+        $view= Yii::$app->controller->action->id;
 
         /*分页条数10*/
         $query=CustomerSpendingRecord::find()->where(['order_id'=>$order_id]);
@@ -22,7 +26,12 @@ class CustomerSpendingRecordController extends BaseController
         ]);
         $models=$query->limit($pager->limit)->offset($pager->offset)->all();
 
-        return $this->render('index',['models'=>$models,'pager'=>$pager,'order_id'=>$order_id]);
+        $this->data[ 'models']=$models;
+        $this->data[ 'pager']=$pager;
+        $this->data[ 'order_id']=$order_id;
+
+//        $this->dd($this->data);
+        return $this->render('index',$this->data);
     }
     /*客服添加某个人的消费记录*/
     public function actionAdd($order_id){
@@ -110,7 +119,9 @@ class CustomerSpendingRecordController extends BaseController
         return [
             'rbac'=>[
                 'class'=>RbacFilter::className(),
-                'only'=>['add','index','agent-list','agent-add','index-all','del','add-one','agent-index'],
+                'only'=>[
+                    'del',
+                ],
             ]
         ];
     }

@@ -19,8 +19,8 @@
         <th>商品数量</th>
         <th>单价(cny)</th>
         <th>单价(peso)</th>
-        <th>人民币(Deposit Cny)</th>
-        <th>比索(Deposit Peso)</th>
+        <th>总计人民币(Total Cny)</th>
+        <th>总计比索(Total Peso)</th>
         <th>操作</th>
     </tr>
     <?php $cny=0;$peso=0;?>

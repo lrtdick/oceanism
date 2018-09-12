@@ -8,7 +8,7 @@
         echo $form->field($model,'name');
         echo $form->field($model,'deposit_cny');
         echo $form->field($model,'deposit_peso');
-        echo $form->field($model,'plan_checkin_time')->textInput(['placeholder' =>'yyyy-mm-dd Only111']);
+        echo $form->field($model,'plan_checkin_time')->textInput(['placeholder' =>'yyyy-mm-dd Only']);
         echo $form->field($model,'plan_checkout_time')->textInput(['placeholder' =>'yyyy-mm-dd Only']);
         echo $form->field($model,'remark')->textarea(['rows'=>10,'cols'=>10]);
         echo \yii\bootstrap\Html::submitButton($buttons['common']['submit'],['class'=>'btn btn-sm btn-success']);

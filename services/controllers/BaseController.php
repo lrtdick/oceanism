@@ -168,14 +168,14 @@ class BaseController extends Controller
             //页面标题
             'page_title'=>[
                 'booking_record_list'  =>'预定列表',
-                'agent_booking_list'  =>'代理商预定列表',
+                'agent_booking_record_list'  =>'代理商预定列表',
                 'fixed_goods_change_records_title'=>'固定资产管理表',
             ],
             //表头
             'table_title'=>[
                 //商品列表
                 'category_id'=>'分类id',
-                'gname'=>'商品名称',
+                'goods_name'=>'商品名称',
                 'intro'=>'商品简介',
                 'stock'=>'库存数量',
                 'price_cny'=>'价格(CNY)',
@@ -254,7 +254,10 @@ class BaseController extends Controller
 
 
     ];//e
-
+    public function  dd($w){
+        var_dump($w);
+        exit();
+    }
     public function init(){
         parent::init();
         //实现当前控制器内所有返回结果为json格式
@@ -267,14 +270,13 @@ class BaseController extends Controller
             if($user->use_en==1){
                 $this->data['buttons']=  $this->BaseButton['en'];
                 $this->data['status']=  $this->BaseStatu['en'];
-                var_dump('en');
+//                var_dump('en');
             }else{
                 $this->data['buttons']=  $this->BaseButton['zh'];
                 $this->data['status']=  $this->BaseStatu['zh'];
-                var_dump('zh');
+//                var_dump('zh');
             }
            $this->data['user_id']= $userid;
-
         }else{
             $this->data['buttons']=  $this->BaseButton['zh'];
             $this->data['status']=  $this->BaseStatu['zh'];

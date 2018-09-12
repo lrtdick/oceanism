@@ -48,8 +48,11 @@ class BookingRecordController extends BaseController
             'search_start'=>\Yii::$app->request->get('search_start'),
             'search_end'=>\Yii::$app->request->get('search_end'),
         ];
+
+        $user_id=\Yii::$app->user->identity->getId();//代理商id 测试不填 登录做完再填
+
         $columnList= BookingRecord::getTableSchema()->columnNames;
-        $models = BookingRecord::SeachModelList($Search_condition,5,$columnList[0],'DESC');
+        $models = BookingRecord::SeachAgentBoookingRecordList($Search_condition,5,$columnList[0],'DESC');
 
         $this->data[ 'models']=$models['lists'];
         $this->data[ 'pager']=$models['pager'];
@@ -64,9 +67,7 @@ class BookingRecordController extends BaseController
 
         $model=new BookingRecord();
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
-
 //            var_dump($model);exit();
-
             $model->user_id=\Yii::$app->user->identity->getId();//代理商id 测试不填 登录做完再填
             $model->booking_time=time();
             $model->plan_checkin_time=strtotime($model->plan_checkin_time);
@@ -89,11 +90,11 @@ class BookingRecordController extends BaseController
     public function actionAgentAdd(){
         $model=new BookingRecord();
         if($model->load(\Yii::$app->request->post()) && $model->validate()){
-            $model->userid=\Yii::$app->user->identity->getId();//测试不填 登录做完再填
-            $model->ctime=time();
-            $model->checkin_time=strtotime($model->checkin_time);
-            $model->checkout_time=strtotime($model->checkout_time);
-            $model->state=1;
+            $model->user_id=\Yii::$app->user->identity->getId();//代理商id 测试不填 登录做完再填
+            $model->booking_time=time();
+            $model->plan_checkin_time=strtotime($model->plan_checkin_time);
+            $model->plan_checkout_time=strtotime($model->plan_checkout_time);
+            $model->status=1;
             $model->save(false);
             \Yii::$app->session->setFlash('success','预定成功(Predetermined success)');
             return "<script>window.history.go(-2);</script>";
