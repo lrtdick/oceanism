@@ -13,7 +13,7 @@ class BaseController extends Controller
 
 
     public $BaseButton=[
-        'en'=>[
+        'ww'=>[
             //常用
             'common'=>[
                 'add'=>'Create One',
@@ -137,7 +137,107 @@ class BaseController extends Controller
                         1 => '上架',
                     ],
         ],
+        'en'=>[
+            //常用
+            'common'=>[
+                'add'=>'Add One',
+                'del'=>'Delete One',
+                'edit'=>'Edit',
+                'cancel'=>'Cancel',
+                'search'=>'Search',
+                'view_consume_record'=>'View consume record',
+                'view_booking_goods'=>'View Plan Goods',
+                'action'=>'Action',
+                'search_condition'=>'Search Condition',
+                'submit'=>'Submit',
+                'checkout'=>'Check out',
+                'checkin'=>'Check in',
+            ],
+            //上边栏
+            'up_menu'=>[
+                'welcome'=>'Welcome',
+                'logout'=>'Logout',
 
+            ],
+            //左边栏
+            'left_menu'=>[
+                'welcome'=>'Welcome',
+                'change_password'=>'Change Password',
+            ],
+            //页面标题
+            'page_title'=>[
+                'booking_record_list'  =>'Orders',
+                'agent_booking_record_list'  =>'Agent Orders',
+                'fixed_goods_change_records_title'=>'Fixed Assets',
+            ],
+            //表头
+            'table_title'=>[
+                //商品列表
+                'category_id'=>'Category ID',
+                'goods_name'=>'Name',
+                'intro'=>'Intro',
+                'stock'=>'Stock',
+                'price_cny'=>'Price(CNY)',
+                'price_peso'=>'Price(PESO)',
+                'price_agent_cny'=>'Agent Price(CNY)',
+                'price_agent_peso'=>'Agent Price(PESO)',
+                'is_on_sale'=>'is on sale？',
+                'created_time'=>'Created Time',
+
+                //预定列表
+                'id'=>'Records ID',
+                'name'=>'Name',
+                'passport'=>'Passport',
+                'tel'=>'Mobile',
+                'wechat'=>'Wechat',
+                'booking_cny'=>'Payment CNY when Arrive',
+                'booking_peso'=>'Payment Peso when Arrive',
+
+                'remark'=>'Remark',
+                'status'=>'Status',
+                'action'=>'Action',
+                'username'=>'Agent Name',
+                'userid'=>'Agent id',
+                'booking_time'=>'Booking Time',
+                'checkin_time'=>'Checkin Time',
+                'checkout_time'=>'Checkout Time',
+
+                'deposit_cny'=>'Payment CNY when Arrive',
+                'deposit_peso'=>'Payment Peso when Arrive',
+                'agent_bonus'=>'Agent Bonus',
+                'plan_checkin_time'=>'Plan Checkin Time',
+                'plan_checkout_time'=>'Plan Checkout Time',
+                //商品列表
+
+                //固定资产列表
+                'gid'=>'GOODS ID',
+                'user_id'=>'ACCOUNT ID',
+                'type'=>'TYPE',
+                'amount'=>'AMOUNT',
+                'ctime'=>'Created Time',
+
+            ],
+            //搜索
+            'search_form'=>[
+                'search_passport'=>'Search by passport',
+                'search_name'=>'Search by name',
+                'search_start'=>'Search by start time',
+                'search_end'=>'Search by end time',
+            ],
+            'is_on_sale' => [
+                0 => 'No',
+                1 => 'Yes',
+            ],
+            'goods_status' => [
+                0 => 'Disable',
+                1 => 'Enable',
+            ],
+            'tips'=>[
+                'agent_booking_list'=>"How to use agent order list：
+                        " ,
+            ]
+
+        ],
         'zh'=>[
             //常用
             'common'=>[
