@@ -145,7 +145,7 @@ class BaseController extends Controller
                 'edit'=>'Edit',
                 'cancel'=>'Cancel',
                 'search'=>'Search',
-                'view_consume_record'=>'View consume record',
+                'view_consume_record'=>'View Consume Record',
                 'view_booking_goods'=>'View Plan Goods',
                 'action'=>'Action',
                 'search_condition'=>'Search Condition',
